@@ -1,7 +1,3 @@
-import com.sun.jdi.LocalVariable
-
-import java.nio.file.LinkOption
-
 pipeline {
   agent any
   stages {
@@ -21,8 +17,8 @@ pipeline {
         }
 
         stage('Test Log') {
-          environment{
-            LocalVariable2 = "HelloLocal"
+          environment {
+            LocalVariable2 = 'HelloLocal'
           }
           steps {
             writeFile(file: 'LogTestFile.txt', text: "This ChromeDriverPath ${ChromeDriverPath} and localVariableValue ${LocalVariable2}")
@@ -36,7 +32,7 @@ pipeline {
       parallel {
         stage('Deploy') {
           steps {
-            input(message: 'Do you want to deploy ?', id: 'OK')
+            input(message: 'Do you want to Deployment ?', id: 'OK')
             echo 'Deploying the app'
           }
         }
