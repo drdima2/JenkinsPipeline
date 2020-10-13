@@ -1,7 +1,4 @@
-import com.sun.jdi.LocalVariable
-
-import java.nio.file.LinkOption
-
+// http://vgaidarji.me/blog/2018/07/30/working-with-jenkinsfile-in-intellij-idea/
 pipeline {
   agent any
   stages {
@@ -21,8 +18,8 @@ pipeline {
         }
 
         stage('Test Log') {
-          environment{
-            LocalVariable2 = "HelloLocal"
+          environment {
+            LocalVariable2 = 'HelloLocal'
           }
           steps {
             writeFile(file: 'LogTestFile.txt', text: "This ChromeDriverPath ${ChromeDriverPath} and localVariableValue ${LocalVariable2}")
@@ -33,10 +30,16 @@ pipeline {
     }
 
     stage('Deploy') {
+      when {
+        branch 'main'
+      }
       parallel {
+
+
+
         stage('Deploy') {
           steps {
-            input(message: 'Do you want to deploy ?', id: 'OK')
+            input(message: 'Do you want to Deployment ?', id: 'OK')
             echo 'Deploying the app'
           }
         }
