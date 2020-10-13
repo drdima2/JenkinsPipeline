@@ -1,3 +1,7 @@
+import com.sun.jdi.LocalVariable
+
+import java.nio.file.LinkOption
+
 pipeline {
   agent any
   stages {
@@ -17,8 +21,11 @@ pipeline {
         }
 
         stage('Test Log') {
+          environment{
+            LocalVariable = "HelloLocal"
+          }
           steps {
-            writeFile(file: 'LogTestFile.txt', text: "This is an automation file log ${ChromeDriverPath}")
+            writeFile(file: 'LogTestFile.txt', text: "This ChromeDriverPath ${ChromeDriverPath} and localVariableValue ${LocalVariable}")
           }
         }
 
